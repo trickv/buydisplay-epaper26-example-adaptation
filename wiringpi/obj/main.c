@@ -35,9 +35,9 @@ int main(void)
     if(EPD_Init() != 0) {
         printf("e-Paper init failed\r\n");
     }
-    printf("epd  clear\r\n");
-    EPD_Clear();
-    DEV_Delay_ms(200);
+    //printf("epd  clear\r\n");
+    //EPD_Clear();
+    //DEV_Delay_ms(200);
 
     //Create a new image cache named IMAGE_BW and fill it with white
      UBYTE *BlackImage, *RedImage;
@@ -78,83 +78,15 @@ int main(void)
     printf("show bmp\r\n");
     printf("read black bmp\r\n");
     Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/026-1rb1.bmp", 0, 0);
+    GUI_ReadBmp("./pic/cw-1rb1.bmp", 0, 0);
     printf("read red bmp\r\n");
     Paint_SelectImage(RedImage);
-    GUI_ReadBmp("./pic/026-1rr1.bmp", 0, 0);
+    GUI_ReadBmp("./pic/cw-1rb2.bmp", 0, 0);
     EPD_Display(BlackImage, RedImage);
-    DEV_Delay_ms(2000);
-
-  
-    printf("show bmp\r\n");
-    printf("read black bmp\r\n");
-    Paint_SelectImage(BlackImage);
-    GUI_ReadBmp("./pic/026-1rb2.bmp", 0, 0);
-    printf("read red bmp\r\n");
-    Paint_SelectImage(RedImage);
-    GUI_ReadBmp("./pic/026-1rr2.bmp", 0, 0);
-    EPD_Display(BlackImage, RedImage);
-    DEV_Delay_ms(2000);
-
-#endif
-
-#if 1
-    /*show image for array*/
-    printf("show image for array\r\n");
-    Paint_SelectImage(BlackImage);
-    Paint_DrawBitMap(IMAGE_BLACK);
-
-    Paint_SelectImage(RedImage);
-    Paint_DrawBitMap(IMAGE_RED);
-
-    EPD_Display(BlackImage, RedImage);
-    DEV_Delay_ms(2000);
-#endif
-
-    printf("Paint_NewImage\r\n");
-    Paint_NewImage(BlackImage, EPD_WIDTH, EPD_HEIGHT, 90, WHITE);
-    Paint_SelectImage(BlackImage);
-    Paint_Clear(WHITE);
-
-#if 1   // Drawing on the image
- /*Horizontal screen*/
-    Paint_NewImage(BlackImage, EPD_WIDTH, EPD_HEIGHT, 90, WHITE);
-    Paint_NewImage(RedImage, EPD_WIDTH, EPD_HEIGHT, 90, WHITE);
-
-    //1.Draw black image
-    Paint_SelectImage(BlackImage);
-    Paint_Clear(WHITE);
-    Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 90, BLACK, DOT_PIXEL_2X2, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 100, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
-    Paint_DrawPoint(10, 110, BLACK, DOT_PIXEL_3X3, DOT_STYLE_DFT);
-    Paint_DrawLine(20, 70, 70, 120, BLACK, LINE_STYLE_SOLID, DOT_PIXEL_1X1);
-    Paint_DrawLine(70, 70, 20, 120, BLACK, LINE_STYLE_SOLID, DOT_PIXEL_1X1);      
-    Paint_DrawRectangle(20, 70, 70, 120, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);
-    Paint_DrawRectangle(80, 70, 130, 120, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
-    Paint_DrawString_EN(10, 0, "www.buydisplay.com", &Font16, BLACK, WHITE);    
-
-    Paint_DrawNum(10, 50, 987654321, &Font16, WHITE, BLACK);
     
-    //2.Draw red image
-    Paint_SelectImage(RedImage);
-    Paint_Clear(WHITE);
-    Paint_DrawCircle(160, 95, 20, BLACK, DRAW_FILL_EMPTY, DOT_PIXEL_1X1);
-    Paint_DrawCircle(210, 95, 20, BLACK, DRAW_FILL_FULL, DOT_PIXEL_1X1);
-    Paint_DrawLine(85, 95, 125, 95, BLACK, LINE_STYLE_DOTTED, DOT_PIXEL_1X1);
-    Paint_DrawLine(105, 75, 105, 115, BLACK, LINE_STYLE_DOTTED, DOT_PIXEL_1X1);  
-    Paint_DrawString_EN(10, 20, "hello world", &Font12, WHITE, BLACK);
-    Paint_DrawNum(10, 33, 123456789, &Font12, WHITE,BLACK);
-    
-    printf("EPD_Display\r\n");
-    EPD_Display(BlackImage, RedImage);
-    DEV_Delay_ms(2000);   
 
 #endif
 
-    DEV_Delay_ms(15000);
-    printf("epd  clear------------------------\r\n");
-    EPD_Clear();
 
     printf("Goto Sleep mode...\r\n");
     EPD_Sleep();
